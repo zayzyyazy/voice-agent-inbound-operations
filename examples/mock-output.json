@@ -1,0 +1,15 @@
+{
+  "verification": {
+    "verified": true,
+    "method": "phone_birthday"
+  },
+  "decision": {
+    "allowed": true,
+    "route": "read_delivery_status",
+    "nextStep": "call_operational_function"
+  },
+  "qa": {
+    "spokenClaimBackedByFunction": true,
+    "flags": []
+  }
+}

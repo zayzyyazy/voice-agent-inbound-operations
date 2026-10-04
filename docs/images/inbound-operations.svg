@@ -1,0 +1,52 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="720" viewBox="0 0 1200 720" role="img" aria-labelledby="title desc">
+  <title id="title">Inbound operational voice agent architecture</title>
+  <desc id="desc">A sanitized diagram showing inbound routing, verification, operational functions, failure handling, and QA audit.</desc>
+  <rect width="1200" height="720" fill="#f8f9fc"/>
+  <style>
+    .box{fill:#fff;stroke:#25324d;stroke-width:2;rx:8}
+    .controller{fill:#eef2ff;stroke:#3448a3;stroke-width:2;rx:8}
+    .decision{fill:#fff8df;stroke:#946b00;stroke-width:2}
+    .action{fill:#e9f8ef;stroke:#217648;stroke-width:2;rx:8}
+    .qa{fill:#f2ecff;stroke:#6840a3;stroke-width:2;rx:8}
+    .fail{fill:#fff0f0;stroke:#9a2b2b;stroke-width:2;rx:8}
+    .text{font-family:Arial,sans-serif;font-size:21px;fill:#172033}
+    .small{font-size:16px;fill:#46536b}
+    .arrow{stroke:#526079;stroke-width:3;fill:none;marker-end:url(#arrow)}
+  </style>
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#526079"/>
+    </marker>
+  </defs>
+  <text x="60" y="64" class="text" font-size="32" font-weight="700">Inbound Operational Agent</text>
+  <rect x="60" y="120" width="200" height="88" class="box"/>
+  <text x="92" y="154" class="text">Inbound call</text>
+  <text x="92" y="182" class="small">intent capture</text>
+  <path d="M260 164 H350" class="arrow"/>
+  <polygon points="450,104 560,164 450,224 340,164" class="decision"/>
+  <text x="393" y="158" class="text">Protected</text>
+  <text x="398" y="185" class="small">action?</text>
+  <path d="M560 164 H650" class="arrow"/>
+  <rect x="650" y="120" width="230" height="88" class="controller"/>
+  <text x="682" y="154" class="text">Verification</text>
+  <text x="682" y="182" class="small">phone / address / ID</text>
+  <path d="M880 164 H970" class="arrow"/>
+  <polygon points="1060,104 1170,164 1060,224 950,164" class="decision"/>
+  <text x="1018" y="158" class="text">Verified?</text>
+  <path d="M1060 224 V310" class="arrow"/>
+  <rect x="940" y="310" width="240" height="88" class="action"/>
+  <text x="972" y="344" class="text">Operational function</text>
+  <text x="972" y="372" class="small">lookup / write / ticket</text>
+  <path d="M940 354 H800" class="arrow"/>
+  <rect x="560" y="310" width="240" height="88" class="qa"/>
+  <text x="594" y="344" class="text">QA audit</text>
+  <text x="594" y="372" class="small">claim vs evidence</text>
+  <path d="M950 164 L845 450" class="arrow"/>
+  <rect x="650" y="450" width="250" height="88" class="fail"/>
+  <text x="682" y="484" class="text">Recovery path</text>
+  <text x="682" y="512" class="small">not identified / review</text>
+  <path d="M450 224 V310" class="arrow"/>
+  <rect x="330" y="310" width="240" height="88" class="box"/>
+  <text x="362" y="344" class="text">General routing</text>
+  <text x="362" y="372" class="small">answer or transfer</text>
+</svg>

@@ -1,0 +1,21 @@
+{
+  "intent": "delivery_status",
+  "requestedAction": "read_delivery_status",
+  "phoneLookupFound": true,
+  "birthdayCheck": "passed",
+  "events": [
+    {
+      "type": "function_result",
+      "name": "get_delivery_status",
+      "ok": true
+    },
+    {
+      "type": "agent_claim",
+      "claimsAction": true
+    },
+    {
+      "type": "call_ended",
+      "reason": "completed"
+    }
+  ]
+}
