@@ -14,7 +14,7 @@ I worked on the surrounding operational architecture for an inbound German Leapi
 
 The private evidence includes production audit outputs, Leaping workflow/configuration exports, and QA/debug screenshots. This public repository is a sanitized reconstruction using fictional examples. It does not contain original prompts, raw workflow exports, recordings, customer records, internal endpoints, credentials, company names, or real call IDs.
 
-For the second pass, I audited 35 relevant inbound Leaping JSON/config exports plus structured call-export files containing thousands of call records. The sanitized evidence summary is in [docs/evidence-audit.md](docs/evidence-audit.md).
+For the second pass, I audited 35 relevant inbound Leaping JSON/config exports plus structured call-export files containing thousands of call records. The sanitized evidence summary is in [docs/evidence-audit.md](docs/evidence-audit.md), and the deeper engineering breakdown is in [docs/implementation-notes.md](docs/implementation-notes.md).
 
 ## How The System Works
 
