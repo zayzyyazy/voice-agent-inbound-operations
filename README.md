@@ -1,164 +1,89 @@
 # Voice Agent Inbound Operations
 
-An inbound Leaping voice-agent case study showing how a production support call can be routed through verification, tool calls, operational actions, failure recovery, and QA checks.
+Public-safe case study of an inbound Leaping voice-agent system for operational support calls.
 
-## The Problem
-
-Inbound operational agents are dangerous when the conversation sounds complete but the system action did not happen. The production problem was to make the Leaping workflow reliable around the LLM: move fragile business logic out of open-ended dialogue and into state, routing, function results, and review paths.
-
-The interesting work was everything around the voice model: identity verification, function sequencing, structured outputs, API boundaries, ticket/action gating, failure analysis, and regression testing.
-
-## What I Worked On
-
-I worked on the surrounding operational architecture for an inbound German Leaping voice-agent system: prompts, intent routing, customer verification paths, function/tool sequencing, API-backed lookups and writes, delivery/status logic, ticket/email paths, transfer behavior, dropped-call and missing-action analysis, and QA methodology for real call exports.
-
-The private evidence includes production audit outputs, Leaping workflow/configuration exports, and QA/debug screenshots. This public repository is a sanitized reconstruction using fictional examples. It does not contain original prompts, raw workflow exports, recordings, customer records, internal endpoints, credentials, company names, or real call IDs.
-
-For the second pass, I audited 35 relevant inbound Leaping JSON/config exports plus structured call-export files containing thousands of call records. The sanitized evidence summary is in [docs/evidence-audit.md](docs/evidence-audit.md), and the deeper engineering breakdown is in [docs/implementation-notes.md](docs/implementation-notes.md).
-
-I also added public-safe call evidence from the real QA/export workflow. The evidence note is in [docs/call-evidence.md](docs/call-evidence.md), with an aggregate sanitized sample in [examples/sanitized-call-export-evidence.json](examples/sanitized-call-export-evidence.json).
-
-## How The System Works
+This repo is about the work around the LLM: verification, routing, deterministic functions, delivery/status logic, structured ticketing, failure recovery, call-export analysis, and regression testing. The goal was to move from prompt-tweaking toward an observable production system.
 
 ![Architecture diagram](docs/images/inbound-operations.svg)
 
-1. The inbound call starts with intent detection and customer lookup context.
-2. Protected actions require verification before the agent can proceed.
-3. Verification can use multiple paths: phone lookup plus birthday, address/postal fallback, or insurance-number fallback.
-4. Function results determine whether the agent may transition, speak success, create a ticket, or transfer.
-5. QA checks compare transcript claims against function evidence.
+## What This Proves
 
-## Leaping Evidence
+The system matured from a mostly prompt-controlled voice bot into a measured operational workflow:
+
+- protected actions require verification evidence
+- delivery/status answers depend on backend fields, not speculation
+- tickets and transfers are checked against function evidence
+- production issues become regression scenarios
+- success wording is tied to backend proof
+
+The strongest theme is not “better prompts.” It is converting voice-agent behavior into software that can be observed, tested, constrained, and gradually automated.
+
+## My Work
+
+- Audited large production call cohorts instead of relying on individual bad-call anecdotes.
+- Redesigned verification routing around phone, address/postal, and identifier fallback paths.
+- Investigated authentication bypass, wrong function order, verification loops, missing tickets, duplicate tickets, transfer misses, and false success claims.
+- Helped move delivery/status logic from LLM reasoning into backend-driven fields and deterministic date cases.
+- Built QA categories and regression mapping for high-risk production failures.
+- Worked on structured ticketing, new-customer callback handoff, material-change actions, and action-proof rules.
+- Helped introduce deterministic MCP/backend components so the agent could converse while code made sensitive decisions.
+
+## Evidence Included
 
 ![Sanitized Leaping inbound topology](docs/images/leaping-inbound-topology.png)
 
-This export-derived evidence shows the actual Leaping topology after sanitization: intent routing, verification paths, function stages, field setters, transfer, delivery/status-related routes, and protected action branches. It is rendered from the real Leaping JSON export with prompts, IDs, endpoints, and customer data removed.
-
-![Sanitized Leaping function inventory](docs/images/leaping-inbound-functions.png)
-
-The function inventory shows the API/function surface behind the inbound agent: phone/customer lookups, format checks, birthday/address checks, update actions, email/ticket actions, and delivery-status classification helpers. Endpoint URLs and headers are intentionally hidden.
-
-## QA Evidence
-
-![Sanitized QA issue tracker](docs/images/qa-issues-sanitized.png)
-
-This real QA/debug screenshot shows recurring call-pattern issues grouped for investigation: long silence, order-status lookup failure, repeated authentication capture, pacing issues, and proposed fixes. Company branding and sample IDs are redacted.
-
-![Sanitized call-review screen](docs/images/call-review-sanitized.png)
-
-This call-review screenshot shows the evidence workflow I used around the agent: transcript snippets, outcome labels, findings, and manual review controls. Identifying labels and transcript details are sanitized.
-
-![Regression dashboard](docs/images/regression-dashboard.png)
-
-The regression dashboard shows the release-gate mindset around the Leaping agent: P0/P1 test subsets, mapped test runs, pass/fail/block status, and high-risk categories.
-
-![Production issue mapping](docs/images/production-issue-mapping.png)
-
-The production issue map shows the debugging taxonomy used for real call analysis: verification bypass, wrong function order, unresolved drops, missing tickets, duplicate tickets, transfer misses, function errors, ASR numeric capture, and delivery/status field problems.
-
-## Real Call Evidence
+Export-derived topology from real Leaping JSON: intent routing, verification paths, function stages, field setters, transfer, delivery/status routes, and protected action branches.
 
 ![Redacted real call library](docs/images/real-call-library-redacted.png)
 
-This redacted call-library screenshot comes from the real review workflow. It keeps the technical evidence visible: production/test grouping, issue categories, outcome labels, findings counts, and call-review organization. Customer/company identifiers and raw call IDs are removed.
+Real call-review evidence with identifiers removed. It keeps the useful proof visible: production/test grouping, issue categories, findings counts, and review organization.
 
-![Redacted real call debug view](docs/images/real-call-debug-redacted.png)
+![Regression dashboard](docs/images/regression-dashboard.png)
 
-This redacted debug view shows the review method behind individual call analysis: outcome classification, confirmed findings, issue labels, review status, and the generated review-object area. Raw transcript text, call IDs, recording identifiers, and branding are removed.
+Regression evidence showing the release-gate mindset: P0/P1 tests, mapped issue classes, pass/fail/block status, and high-risk categories.
 
-## Key Engineering Problems
+More detail:
 
-- Preventing protected actions before successful verification.
-- Avoiding LLM-controlled function order for sensitive lookups and writes.
-- Handling noisy numeric/identifier capture in voice calls.
-- Distinguishing business-negative lookup results from technical failures.
-- Detecting cases where the agent promised transfer, ticket creation, or updates without function evidence.
-- Building audit categories for missing tickets, dropped calls, verification loops, duplicate tickets, premature completion, and function errors.
+- [Implementation notes](docs/implementation-notes.md)
+- [Sanitized call evidence](docs/call-evidence.md)
+- [Evidence audit](docs/evidence-audit.md)
+- [Flow notes](docs/flow.md)
 
-## Real Debugging Examples
+## Selected Production Evidence
 
-### Problem
+These numbers are included carefully because audit definitions changed over time. They should be read as evidence of production measurement and directional system maturity, not as a formal causal experiment.
 
-Protected operational paths could continue before successful verification, or after verification failed.
+| Evidence area | Public-safe summary |
+| --- | --- |
+| July production audit | 500 calls reviewed for unresolved drops, missing tickets, function issues, ASR/numeric instability, verification loops, transfer misses, duplicate tickets, and premature completion |
+| Verification audit | 416-call cohort found route-specific problems, including phone birthday bypass and PLZ/VNR recovery issues |
+| September verification cohort | 654 calls entered verification; 531 verified successfully and 527 continued normally |
+| Phone verification shift | late-July phone route: 99/195 successful; Sep 10-22 phone route: 296/346 positive verification |
+| Regression system | 58 regression cases, including 35 P0/core release-gate cases |
+| Call export evidence | sanitized aggregate from a 4,968-record Leaping call export |
 
-### Why It Happened
+## Public Reconstruction
 
-Some state transitions depended too much on dialogue behavior and not enough on deterministic function results.
-
-### What I Changed
-
-I worked on verification routing, function sequencing, and QA checks so protected actions require explicit verification evidence before the agent can proceed.
-
-### Evidence
-
-The production issue map includes `VER-SKIP`, `VER-WRONG-ORDER`, and `VER-NOT-IDENT` categories; the Leaping topology shows the separate verification/function stages.
-
-### Additional Evidence
-
-The evidence audit shows many inbound verification/live exports with 39-42 stages, 17-21 functions, 45-54 fields, switch routing, and ticket/email paths. The call-export audit summarizes structured call records across July and September exports without publishing transcripts, recordings, phone numbers, or call IDs.
-
-### Problem
-
-The agent could verbally imply that a ticket, transfer, or operational action happened even when the required function evidence was missing.
-
-### Why It Happened
-
-Conversation success and system success were not always the same event.
-
-### What I Changed
-
-I separated spoken outcomes from function-backed outcomes in QA and modeled flags for promised-without-evidence, missing-ticket, duplicate-ticket, transfer-missing, and drop-unresolved cases.
-
-### Evidence
-
-The QA issue tracker, call-review screen, regression dashboard, and production issue map show the review loop used to catch those mismatches.
-
-## Example
-
-Input:
+The code in this repo models the key rule:
 
 ```json
 {
-  "intent": "delivery_status",
-  "phoneLookupFound": true,
-  "birthdayCheck": "passed",
-  "requestedAction": "read_delivery_status"
+  "verification": "passed",
+  "requestedAction": "protected_operation",
+  "functionEvidence": "present"
 }
 ```
 
-Decision:
+Only then can the reconstructed controller allow the protected action. If the agent promises an action without function evidence, the QA layer flags it.
 
-```json
-{
-  "verified": true,
-  "allowedAction": "read_delivery_status",
-  "transition": "continue_to_intent"
-}
+## Run The Tests
+
+```bash
+npm test
 ```
 
-Output:
+The tests cover verified calls, failed verification, protected-action blocking, promised action without function evidence, duplicate-ticket risk, and dropped-call recovery.
 
-```json
-{
-  "status": "handled",
-  "spokenClaimBackedByFunction": true,
-  "qaFlags": []
-}
-```
+## Privacy
 
-## Failure Handling
-
-The reconstructed tests cover verified calls, failed verification, protected-action blocking, promised action without function evidence, duplicate ticket risk, and dropped-call recovery. The model is treated as a conversation layer; system truth comes from state and function results.
-
-## Stack
-
-- Leaping voice-agent workflow with dialogue, function, switch, junction, field-setter, transfer, and terminal stages
-- API-backed lookups and writes represented with placeholders
-- Deterministic verification/controller pattern
-- JSON event analysis and QA categories
-- Prompt, routing, field mapping, function sequencing, failure recovery, and production QA work
-- Node.js tests for the public reconstruction
-
-## What This Demonstrates
-
-This project demonstrates inbound operational agent engineering: routing, verification, APIs/functions, failure recovery, and production QA around a conversational interface.
+This public version does not include original prompts, raw workflow exports, recordings, customer records, internal endpoints, credentials, company names, real call IDs, phone numbers, or transcripts. Screenshots and call-export examples are redacted or aggregated.

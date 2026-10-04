@@ -11,6 +11,21 @@ This repository is a public-safe reconstruction of inbound operational Leaping w
 - Built QA categories for promised actions without evidence, missing tickets, duplicate tickets, unresolved drops, transfer misses, verification bypass, and wrong function order.
 - Used structured call exports and review screenshots to compare what the agent said against what functions actually did.
 
+## Job Context
+
+The larger job story was moving the system from prompt-controlled behavior toward an observable, increasingly deterministic production workflow. The work expanded from inspecting individual bad calls into recurring call-export audits, route-specific verification analysis, issue taxonomies, and regression tests.
+
+Some public-safe evidence points:
+
+- A July production audit reviewed 500 calls and mapped issues such as unresolved drops, missing tickets, technical function problems, numeric/ASR instability, verification loops, transfer misses, duplicate tickets, authentication bypass, and premature completion.
+- A 416-call verification audit separated phone, postal/address, identifier, and method-switch routes instead of treating verification as one generic failure bucket.
+- September verification analysis counted 654 calls entering verification; 531 verified successfully and 527 continued normally.
+- The phone route moved from 99 successful calls out of 195 in the late-July classification to 296 positive verifications out of 346 in the Sep 10-22 population.
+- Regression work mapped production issue classes into 58 test scenarios, including 35 P0/core release-gate cases.
+- Call-export analysis grew into thousands of records, which made it possible to distinguish actual defects from natural hangups, requested transfers, negative lookups, or non-protected knowledge questions.
+
+The key shift was architectural: the agent could converse, but sensitive decisions needed state, functions, deterministic exits, and backend proof.
+
 ## How The Leaping Flow Works
 
 1. **Inbound call enters intent routing**
@@ -67,4 +82,3 @@ All endpoints, internal URLs, headers, credentials, call IDs, customer identifie
 | Customer verification | Fictional verification controller and tests |
 | API/tool actions | Placeholder lookup, update, ticket, transfer, and status helpers |
 | Call exports | Aggregated evidence audit without transcripts, recordings, phone numbers, or call IDs |
-
