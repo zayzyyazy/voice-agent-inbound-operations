@@ -30,6 +30,10 @@ The strongest theme is not “better prompts.” It is converting voice-agent be
 
 ## Evidence Included
 
+![Redacted real Leaping workflow](docs/images/real-leaping-workflow-redacted.png)
+
+Real Leaping Studio workflow screenshot, cropped and redacted for public use. It shows inbound routing around lookup functions, open-case checks, intent classification, field setters, verification routing, and protected operational paths. Prompt text and identifying product/company wording are removed.
+
 ![Sanitized Leaping inbound topology](docs/images/leaping-inbound-topology.png)
 
 Export-derived topology from real Leaping JSON: intent routing, verification paths, function stages, field setters, transfer, delivery/status routes, and protected action branches.
@@ -45,6 +49,7 @@ Regression evidence showing the release-gate mindset: P0/P1 tests, mapped issue 
 More detail:
 
 - [Implementation notes](docs/implementation-notes.md)
+- [Upwork portfolio caption](docs/upwork-portfolio.md)
 - [Sanitized call evidence](docs/call-evidence.md)
 - [Evidence audit](docs/evidence-audit.md)
 - [Flow notes](docs/flow.md)
