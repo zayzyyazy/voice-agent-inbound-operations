@@ -14,6 +14,8 @@ I worked on the surrounding operational architecture for an inbound German Leapi
 
 The private evidence includes production audit outputs, Leaping workflow/configuration exports, and QA/debug screenshots. This public repository is a sanitized reconstruction using fictional examples. It does not contain original prompts, raw workflow exports, recordings, customer records, internal endpoints, credentials, company names, or real call IDs.
 
+For the second pass, I audited 35 relevant inbound Leaping JSON/config exports plus structured call-export files containing thousands of call records. The sanitized evidence summary is in [docs/evidence-audit.md](docs/evidence-audit.md).
+
 ## How The System Works
 
 ![Architecture diagram](docs/images/inbound-operations.svg)
@@ -78,6 +80,10 @@ I worked on verification routing, function sequencing, and QA checks so protecte
 ### Evidence
 
 The production issue map includes `VER-SKIP`, `VER-WRONG-ORDER`, and `VER-NOT-IDENT` categories; the Leaping topology shows the separate verification/function stages.
+
+### Additional Evidence
+
+The evidence audit shows many inbound verification/live exports with 39-42 stages, 17-21 functions, 45-54 fields, switch routing, and ticket/email paths. The call-export audit summarizes structured call records across July and September exports without publishing transcripts, recordings, phone numbers, or call IDs.
 
 ### Problem
 
