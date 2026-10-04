@@ -1,0 +1,129 @@
+{
+  "source": "sanitized aggregate derived from real Leaping call export",
+  "public_safety_note": "No raw transcripts, phone numbers, recording links, call IDs, customer data, agent IDs, owner IDs, provider IDs, or private URLs are included.",
+  "record_count": 4968,
+  "status_counts": {
+    "completed": 2023,
+    "dropped": 1532,
+    "transferred": 1411,
+    "failed": 2
+  },
+  "direction_counts": {
+    "inbound": 4968
+  },
+  "success_value_counts": {
+    "None": 3848,
+    "True": 1120
+  },
+  "duration_buckets": {
+    "1_3m": 2213,
+    "3_6m": 1221,
+    "over_6m": 736,
+    "15_59s": 433,
+    "under_15s": 365
+  },
+  "field_presence_counts": {
+    "summary": 4968,
+    "transcript": 4968,
+    "results": 0,
+    "eval_results": 0,
+    "failed_stage": 0,
+    "recording_link_field": 4956,
+    "recording_file_field": 0,
+    "caller_contact_field": 4968
+  },
+  "sanitized_examples": [
+    {
+      "public_call_ref": "CALL-54A2CE0A",
+      "direction": "inbound",
+      "status": "completed",
+      "success": true,
+      "duration_bucket": "over_6m",
+      "has_summary": true,
+      "has_transcript": true,
+      "has_structured_results": true,
+      "has_failed_stage": false,
+      "redacted_fields": [
+        "id",
+        "caller_contact_field",
+        "recording_link_field",
+        "recording_file_field",
+        "transcript",
+        "summary",
+        "telephony_provider_ids",
+        "agent_id",
+        "owner_id",
+        "phone_id"
+      ]
+    },
+    {
+      "public_call_ref": "CALL-E81FB305",
+      "direction": "inbound",
+      "status": "dropped",
+      "success": null,
+      "duration_bucket": "under_15s",
+      "has_summary": true,
+      "has_transcript": true,
+      "has_structured_results": true,
+      "has_failed_stage": false,
+      "redacted_fields": [
+        "id",
+        "caller_contact_field",
+        "recording_link_field",
+        "recording_file_field",
+        "transcript",
+        "summary",
+        "telephony_provider_ids",
+        "agent_id",
+        "owner_id",
+        "phone_id"
+      ]
+    },
+    {
+      "public_call_ref": "CALL-BCD92983",
+      "direction": "inbound",
+      "status": "transferred",
+      "success": null,
+      "duration_bucket": "over_6m",
+      "has_summary": true,
+      "has_transcript": true,
+      "has_structured_results": true,
+      "has_failed_stage": false,
+      "redacted_fields": [
+        "id",
+        "caller_contact_field",
+        "recording_link_field",
+        "recording_file_field",
+        "transcript",
+        "summary",
+        "telephony_provider_ids",
+        "agent_id",
+        "owner_id",
+        "phone_id"
+      ]
+    },
+    {
+      "public_call_ref": "CALL-B11F626B",
+      "direction": "inbound",
+      "status": "failed",
+      "success": null,
+      "duration_bucket": "1_3m",
+      "has_summary": true,
+      "has_transcript": true,
+      "has_structured_results": true,
+      "has_failed_stage": false,
+      "redacted_fields": [
+        "id",
+        "caller_contact_field",
+        "recording_link_field",
+        "recording_file_field",
+        "transcript",
+        "summary",
+        "telephony_provider_ids",
+        "agent_id",
+        "owner_id",
+        "phone_id"
+      ]
+    }
+  ]
+}

@@ -16,6 +16,8 @@ The private evidence includes production audit outputs, Leaping workflow/configu
 
 For the second pass, I audited 35 relevant inbound Leaping JSON/config exports plus structured call-export files containing thousands of call records. The sanitized evidence summary is in [docs/evidence-audit.md](docs/evidence-audit.md), and the deeper engineering breakdown is in [docs/implementation-notes.md](docs/implementation-notes.md).
 
+I also added public-safe call evidence from the real QA/export workflow. The evidence note is in [docs/call-evidence.md](docs/call-evidence.md), with an aggregate sanitized sample in [examples/sanitized-call-export-evidence.json](examples/sanitized-call-export-evidence.json).
+
 ## How The System Works
 
 ![Architecture diagram](docs/images/inbound-operations.svg)
@@ -53,6 +55,16 @@ The regression dashboard shows the release-gate mindset around the Leaping agent
 ![Production issue mapping](docs/images/production-issue-mapping.png)
 
 The production issue map shows the debugging taxonomy used for real call analysis: verification bypass, wrong function order, unresolved drops, missing tickets, duplicate tickets, transfer misses, function errors, ASR numeric capture, and delivery/status field problems.
+
+## Real Call Evidence
+
+![Redacted real call library](docs/images/real-call-library-redacted.png)
+
+This redacted call-library screenshot comes from the real review workflow. It keeps the technical evidence visible: production/test grouping, issue categories, outcome labels, findings counts, and call-review organization. Customer/company identifiers and raw call IDs are removed.
+
+![Redacted real call debug view](docs/images/real-call-debug-redacted.png)
+
+This redacted debug view shows the review method behind individual call analysis: outcome classification, confirmed findings, issue labels, review status, and the generated review-object area. Raw transcript text, call IDs, recording identifiers, and branding are removed.
 
 ## Key Engineering Problems
 
